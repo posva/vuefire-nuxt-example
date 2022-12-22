@@ -12,7 +12,8 @@ export default defineNuxtConfig({
       databaseURL:
         'https://vitesse-vuefire-example-default-rtdb.europe-west1.firebasedatabase.app',
       projectId: 'vitesse-vuefire-example',
-      appId: '1:682870035896:web:8bac46c2357e0bd147eb4d',
+      appId: '1:682870035896:web:18c98382e02cd7b047eb4d',
+      measurementId: 'G-EHSF802FGE',
     },
   },
 })

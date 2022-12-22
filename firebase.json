@@ -5,6 +5,7 @@
   },
   "hosting": {
     "public": ".output/public",
+    "site": "vuefire-nuxt-temp",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
     "rewrites": [
       {

@@ -1,13 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "build": "nuxt build",
+    "build": "pnpm run generate",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
-  "devDependencies": {
-    "nuxt": "3.0.0"
+  "dependencies": {
+    "firebase": "^9.15.0",
+    "nuxt": "^3.0.0",
+    "nuxt-vuefire": "^0.0.17",
+    "vuefire": "^3.0.0-0"
   }
 }

@@ -1,0 +1,22 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // unused
+		match /users/{userId} {
+      allow read;
+      // allow write: if request.auth.uid == userId && resource.data.size() == 1 && resource.data.lastConnection == request.time;
+    }
+
+    match /count/{day} {
+    	allow read;
+      // only allow writing { when: now timestamp; n: int }
+      allow write: if request.resource.data.size() == 2 && request.resource.data.when is timestamp && request.resource.data.n is int;
+    }
+
+    // forbid everything else
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}

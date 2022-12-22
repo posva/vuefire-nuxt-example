@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "firebase": "^9.15.0",
+    "firebase-admin": "^11.4.0",
     "nuxt": "^3.0.0",
     "nuxt-vuefire": "^0.0.17",
     "vuefire": "^3.0.0-0"

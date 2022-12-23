@@ -1,42 +1,48 @@
-# Nuxt 3 Minimal Starter
+# Nuxt example with VueFire (and nuxt-vuefire)
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+- [Demo on Stackblitz](https://stackblitz.com/github/posva/vuefire-vite-example?file=README.md)
+- [Deployed Demo](#TODO)
 
-## Setup
+This is a working example of Nuxt + VueFire created with:
 
-Make sure to install the dependencies:
-
-```bash
-# yarn
-yarn install
-
-# npm
-npm install
-
-# pnpm
-pnpm install --shamefully-hoist
+```sh
+npx nuxi init my-vuefire-nuxt-app
 ```
 
-## Development Server
+Then added VueFire and firebase
 
-Start the development server on http://localhost:3000
-
-```bash
-npm run dev
+```sh
+npm i firebase vuefire nuxt-vuefire
 ```
 
-## Production
+> **Note**
+> Replace `npm` with your favorite package manager
 
-Build the application for production:
+If you want to do SSR, you also need to install `firebase-admin` and create a service account JSON file. TODO: link
 
-```bash
-npm run build
+Setup a Firebase app at [Firebase Console](https://console.firebase.google.com/) and follow their instructions to get your Firebase config and set it in `main.ts`.
+
+Use the `firebase-tools` package (`npm i -g firebase-tools`) to add the configuration to the project with:
+
+```sh
+firebase init
 ```
 
-Locally preview production build:
+> **Info**
+> You don't need to select everything you _might_ need, just select what you need **right now**, you can run the command again later to add new features.
 
-```bash
-npm run preview
-```
+The options selected were:
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+- Firestore
+- Hosting
+
+Make sure to change the `public` directory to `.output/public`. You don't need to worry about the hosting configuration as you will probably have to edit it manually anyway.
+If you set up GitHub actions, **make sure the repository is created** before calling `firebase init`. If you misconfigure any step, that's fine you can call `firebase init` again and select only what you want to add to override existing settings.
+
+## GitHub Workflows
+
+The GitHub workflows you will find in this repository have been adapted from the generated ones to include a cache with pnpm.
+
+## Firebase config
+
+If you want to use this repository as a starter for your project, make sure to replace the different firebase files with your own or simply, run `firebase init` to override them. You will also need to update the config in `main.ts` with your own.

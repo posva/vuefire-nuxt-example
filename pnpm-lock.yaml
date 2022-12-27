@@ -2,17 +2,17 @@ lockfileVersion: 5.4
 
 specifiers:
   firebase: ^9.15.0
-  firebase-admin: ^11.4.0
+  firebase-admin: ^11.4.1
   nuxt: ^3.0.0
-  nuxt-vuefire: ^0.0.17
-  vuefire: ^3.0.0-0
+  nuxt-vuefire: ^0.0.18
+  vuefire: ^3.0.0
 
 dependencies:
   firebase: 9.15.0
-  firebase-admin: 11.4.0
+  firebase-admin: 11.4.1
   nuxt: 3.0.0
-  nuxt-vuefire: 0.0.17_nsymdrhhig6npif3pjresxw3ru
-  vuefire: 3.0.0-beta.8_firebase@9.15.0
+  nuxt-vuefire: 0.0.18_zlan4q4tf66gpnacz6m34gl264
+  vuefire: 3.0.0_firebase@9.15.0
 
 packages:
 
@@ -1456,13 +1456,13 @@ packages:
     resolution: {integrity: sha512-ALYone6pm6QmwZoAgeyNksccT9Q4AWZQ6PvfwR37GT6r6FWUPguq6sUmNGSMV2Wr761oQoBxwGGa6DR5o1DC9g==}
     dependencies:
       '@types/connect': 3.4.35
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
     dev: false
 
   /@types/connect/3.4.35:
     resolution: {integrity: sha512-cdeYyv4KWoEgpBISTxWvqYsVy444DOqehiF3fM3ne10AmJ62RSyNkUnxMJXHQWRQQX2eR94m5y1IZyDwBjV9FQ==}
     dependencies:
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
     dev: false
 
   /@types/estree/1.0.0:
@@ -1472,7 +1472,7 @@ packages:
   /@types/express-serve-static-core/4.17.31:
     resolution: {integrity: sha512-DxMhY+NAsTwMMFHBTtJFNp5qiHKJ7TeqOo23zVEM9alT1Ml27Q3xcTH0xwxn7Q0BbMcVEJOs/7aQtUWupUQN3Q==}
     dependencies:
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
     dev: false
@@ -1489,7 +1489,7 @@ packages:
   /@types/jsonwebtoken/8.5.9:
     resolution: {integrity: sha512-272FMnFGzAVMGtu9tkr29hRL6bZj4Zs1KZNeHLnKqAvp06tAIcarTMwOh8/8bz4FmKRcMxZhZNeUAQsNLoiPhg==}
     dependencies:
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
     dev: false
 
   /@types/linkify-it/3.0.2:
@@ -1522,6 +1522,10 @@ packages:
     resolution: {integrity: sha512-HJSUJmni4BeDHhfzn6nF0sVmd1SMezP7/4F0Lq+aXzmp2xm9O7WXrUtHW/CHlYVtZUbByEvWidHqRtcJXGF2Ng==}
     dev: false
 
+  /@types/node/18.11.18:
+    resolution: {integrity: sha512-DHQpWGjyQKSHj3ebjFI/wRKcqQcdR+MoFBygntYOZytCqNfkd2ZC4ARDJ2DQqhjH5p85Nnd3jhUJIXrszFX/JA==}
+    dev: false
+
   /@types/qs/6.9.7:
     resolution: {integrity: sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==}
     dev: false
@@ -1538,7 +1542,7 @@ packages:
     resolution: {integrity: sha512-z5xyF6uh8CbjAu9760KDKsH2FcDxZ2tFCsA4HIMWE6IkiYMXfVoa+4f9KX+FN0ZLsaMw1WNG2ETLA6N+/YA+cg==}
     dependencies:
       '@types/mime': 3.0.1
-      '@types/node': 18.11.17
+      '@types/node': 18.11.18
     dev: false
 
   /@unhead/dom/1.0.13:
@@ -3045,15 +3049,15 @@ packages:
       to-regex-range: 5.0.1
     dev: false
 
-  /firebase-admin/11.4.0:
-    resolution: {integrity: sha512-Nuw7j3mr0qSQqq0lx7yh8F+vVDDojd8FBDibmoiIjFDUu/YQ18fye8CNzS5tdi9YYGN4A/tkVz5bCqxYrf5bvA==}
+  /firebase-admin/11.4.1:
+    resolution: {integrity: sha512-t5+Pf8rC01TW1KPD5U8Q45AEn7eK+FJaHlpzYStFb62J+MQmN/kB/PWUEsNn+7MNAQ0DZxFUCgJoi+bRmf83oQ==}
     engines: {node: '>=14'}
     dependencies:
       '@fastify/busboy': 1.1.0
       '@firebase/database-compat': 0.2.10
       '@firebase/database-types': 0.9.17
-      '@types/node': 18.11.17
-      jsonwebtoken: 8.5.1
+      '@types/node': 18.11.18
+      jsonwebtoken: 9.0.0
       jwks-rsa: 2.1.5
       node-forge: 1.3.1
       uuid: 9.0.0
@@ -3731,7 +3735,7 @@ packages:
       klaw: 3.0.0
       markdown-it: 12.3.2
       markdown-it-anchor: 8.6.6_2zb4u3vubltivolgu556vv4aom
-      marked: 4.2.4
+      marked: 4.2.5
       mkdirp: 1.0.4
       requizzle: 0.2.4
       strip-json-comments: 3.1.1
@@ -3771,20 +3775,14 @@ packages:
       graceful-fs: 4.2.10
     dev: false
 
-  /jsonwebtoken/8.5.1:
-    resolution: {integrity: sha512-XjwVfRS6jTMsqYs0EsuJ4LGxXV14zQybNd4L2r0UvbVnSF9Af8x7p5MzbJ90Ioz/9TI41/hTCvznF/loiSzn8w==}
-    engines: {node: '>=4', npm: '>=1.4.28'}
+  /jsonwebtoken/9.0.0:
+    resolution: {integrity: sha512-tuGfYXxkQGDPnLJ7SibiQgVgeDgfbPq2k2ICcbgqW8WxWLBAxKQM/ZCu/IT8SOSwmaYl4dpTFCW5xZv7YbbWUw==}
+    engines: {node: '>=12', npm: '>=6'}
     dependencies:
       jws: 3.2.2
-      lodash.includes: 4.3.0
-      lodash.isboolean: 3.0.3
-      lodash.isinteger: 4.0.4
-      lodash.isnumber: 3.0.3
-      lodash.isplainobject: 4.0.6
-      lodash.isstring: 4.0.1
-      lodash.once: 4.1.1
+      lodash: 4.17.21
       ms: 2.1.3
-      semver: 5.7.1
+      semver: 7.3.8
     dev: false
 
   /jwa/1.4.1:
@@ -3927,40 +3925,16 @@ packages:
     resolution: {integrity: sha512-C5N2Z3DgnnKr0LOpv/hKCgKdb7ZZwafIrsesve6lmzvZIRZRGaZ/l6Q8+2W7NaT+ZwO3fFlSCzCzrDCFdJfZ4g==}
     dev: false
 
-  /lodash.includes/4.3.0:
-    resolution: {integrity: sha512-W3Bx6mdkRTGtlJISOvVD/lbqjTlPPUDTMnlXZFnVwi9NKJ6tiAk6LVdlhZMm17VZisqhKcgzpO5Wz91PCt5b0w==}
-    dev: false
-
   /lodash.isarguments/3.1.0:
     resolution: {integrity: sha512-chi4NHZlZqZD18a0imDHnZPrDeBbTtVN7GXMwuGdRH9qotxAjYs3aVLKc7zNOG9eddR5Ksd8rvFEBc9SsggPpg==}
-    dev: false
-
-  /lodash.isboolean/3.0.3:
-    resolution: {integrity: sha512-Bz5mupy2SVbPHURB98VAcw+aHh4vRV5IPNhILUCsOzRmsTmSQ17jIuqopAentWoehktxGd9e/hbIXq980/1QJg==}
-    dev: false
-
-  /lodash.isinteger/4.0.4:
-    resolution: {integrity: sha512-DBwtEWN2caHQ9/imiNeEA5ys1JoRtRfY3d7V9wkqtbycnAmTvRRmbHKDV4a0EYc678/dia0jrte4tjYwVBaZUA==}
-    dev: false
-
-  /lodash.isnumber/3.0.3:
-    resolution: {integrity: sha512-QYqzpfwO3/CWf3XP+Z+tkQsfaLL/EnUlXWVkIk5FUPc4sBdTehEqZONuyRt2P67PXAk+NXmTBcc97zw9t1FQrw==}
     dev: false
 
   /lodash.isplainobject/4.0.6:
     resolution: {integrity: sha512-oSXzaWypCMHkPC3NvBEaPHf0KsA5mvPrOPgQWDsbg8n7orZ290M0BmC/jgRZ4vcJ6DTAhjrsSYgdsW/F+MFOBA==}
     dev: false
 
-  /lodash.isstring/4.0.1:
-    resolution: {integrity: sha512-0wJxfxH1wgO3GrbuP+dTTk7op+6L41QCXbGINEmD+ny/G/eCqGzxyCsh7159S+mgDDcoarnBw6PC1PS5+wUGgw==}
-    dev: false
-
   /lodash.memoize/4.1.2:
     resolution: {integrity: sha512-t7j+NzmgnQzTAYXcsHYLgimltOV1MXHtlOWf6GjL9Kj8GK5FInw5JotxvbOs+IvV1/Dzo04/fCGfLVs7aXb4Ag==}
-    dev: false
-
-  /lodash.once/4.1.1:
-    resolution: {integrity: sha512-Sb487aTOCr9drQVL8pIxOzVhafOjZN9UU54hiN8PU3uAiSV7lx1yYNpbNmex2PK6dSJoNTSJUUswT651yww3Mg==}
     dev: false
 
   /lodash.pick/4.4.0:
@@ -4090,8 +4064,8 @@ packages:
     dev: false
     optional: true
 
-  /marked/4.2.4:
-    resolution: {integrity: sha512-Wcc9ikX7Q5E4BYDPvh1C6QNSxrjC9tBgz+A/vAhp59KXUgachw++uMvMKiSW8oA85nopmPZcEvBoex/YLMsiyA==}
+  /marked/4.2.5:
+    resolution: {integrity: sha512-jPueVhumq7idETHkb203WDD4fMA3yV9emQ5vLwop58lu8bTclMghBWcYAavlDqIEMaisADinV1TooIFCfqOsYQ==}
     engines: {node: '>= 12'}
     hasBin: true
     dev: false
@@ -4439,8 +4413,8 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /nuxt-vuefire/0.0.17_nsymdrhhig6npif3pjresxw3ru:
-    resolution: {integrity: sha512-S3BEDZGyo5ucESaCxJzgTYob4aLJ/q4tuo0ZfE9EQ/sBQuSAWR+sLZgb7zPS70Re/bYDaVUslRD58iBr/8DLqA==}
+  /nuxt-vuefire/0.0.18_zlan4q4tf66gpnacz6m34gl264:
+    resolution: {integrity: sha512-JEXc+A0hsOzX7J51Z7QFZH7AFZZts4EBE5SgG9MUXFmRbgIsejqHXjXIaJSpMZ2r/3scq7LldbF7MZOq9XHVlQ==}
     peerDependencies:
       '@firebase/app-types': '>=0.8.1'
       firebase: ^9.0.0
@@ -4457,9 +4431,9 @@ packages:
     dependencies:
       '@nuxt/kit': 3.0.0
       firebase: 9.15.0
-      firebase-admin: 11.4.0
+      firebase-admin: 11.4.1
       lru-cache: 7.14.1
-      vuefire: 3.0.0-beta.8_firebase@9.15.0
+      vuefire: 3.0.0_firebase@9.15.0
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -5361,11 +5335,6 @@ packages:
     resolution: {integrity: sha512-4AsO/FrViE/iDNEPaAQlb77tf0csuq27EsVpy6ett584EcRTp6pTDLoGWVxCD77y5iU5FauOvhsI4o1APwPoSQ==}
     dev: false
 
-  /semver/5.7.1:
-    resolution: {integrity: sha512-sauaDf/PZdVgrLTNYHRtpXa1iRiKcaebiKQ1BJdpQlWH2lCvexQdX55snPFyK7QzpudqbCI0qXFfOasHdyNDGQ==}
-    hasBin: true
-    dev: false
-
   /semver/6.3.0:
     resolution: {integrity: sha512-b39TBaTSfV6yBrapU89p5fKekE2m/NwnDocOVruQFS1/veMgdzuPcnOM34M6CwxW8jH/lxEa5rBoDeUwu5HHTw==}
     hasBin: true
@@ -6119,8 +6088,8 @@ packages:
       '@vue/shared': 3.2.45
     dev: false
 
-  /vuefire/3.0.0-beta.8_firebase@9.15.0:
-    resolution: {integrity: sha512-/ObiVhjGGgXz11gY1fND7zUxFddWhWaoqNxHI3bFnrY8ONPkOc+JJ5zbVoxglF9oCMPsKNdPixWBWYAHFx8kjQ==}
+  /vuefire/3.0.0_firebase@9.15.0:
+    resolution: {integrity: sha512-Jc2uvIrSgbJd1XTHMMrgsQMR7VLjyywCGaM/EDw1E6ecv/94gXx8Ako+AAo2lc/sl/f7PdbBZ3mkIaXe7gMFgw==}
     peerDependencies:
       '@vue/composition-api': '*'
       firebase: ^9.0.0

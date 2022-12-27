@@ -1,19 +1,30 @@
+import { resolvePath } from '@nuxt/kit'
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['nuxt-vuefire'],
   // temporary, otherwise fails with vite error but this is not enough because we haven't added admin credentials
-  ssr: true,
+  ssr: false,
+
+  // nitro: {
+  //   prerender: {
+  //     crawlLinks: false,
+  //     routes: [],
+  //   },
+  // },
 
   vuefire: {
     auth: true,
     config: {
-      apiKey: 'AIzaSyDyjJeqXsmmSldQL6AO9FlDWQqCYq16tl8',
-      authDomain: 'vitesse-vuefire-example.firebaseapp.com',
-      databaseURL:
-        'https://vitesse-vuefire-example-default-rtdb.europe-west1.firebasedatabase.app',
-      projectId: 'vitesse-vuefire-example',
-      appId: '1:682870035896:web:18c98382e02cd7b047eb4d',
-      measurementId: 'G-EHSF802FGE',
+      apiKey: 'AIzaSyCvPJk1gTgga_H7SS6YKgQTSBwBYWzwWBE',
+      authDomain: 'nuxtparaeduardo.firebaseapp.com',
+      projectId: 'nuxtparaeduardo',
+      storageBucket: 'nuxtparaeduardo.appspot.com',
+      messagingSenderId: '817686702603',
+      appId: '1:817686702603:web:6cc63067ca20f6e5c1350e',
     },
   },
+
+  // TODO: to add with ssr
+  routeRules: {},
 })

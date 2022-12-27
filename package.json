@@ -1,7 +1,7 @@
 {
   "private": true,
   "scripts": {
-    "build": "pnpm run generate",
+    "build": "nuxt build",
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
@@ -9,9 +9,9 @@
   },
   "dependencies": {
     "firebase": "^9.15.0",
-    "firebase-admin": "^11.4.0",
+    "firebase-admin": "^11.4.1",
     "nuxt": "^3.0.0",
-    "nuxt-vuefire": "^0.0.17",
-    "vuefire": "^3.0.0-0"
+    "nuxt-vuefire": "^0.0.18",
+    "vuefire": "^3.0.0"
   }
 }

@@ -8,9 +8,10 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@vueuse/core": "^9.9.0",
     "firebase": "^9.15.0",
     "firebase-admin": "^11.4.1",
-    "nuxt": "^3.0.0",
+    "nuxt": "npm:nuxt3@latest",
     "nuxt-vuefire": "^0.0.18",
     "vuefire": "^3.0.0"
   }

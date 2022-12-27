@@ -1,5 +1,24 @@
 <template>
-  <div>
-    <NuxtWelcome />
+  <div id="app-container">
+    <div id="app">
+      <NuxtPage />
+    </div>
   </div>
 </template>
+
+<style>
+#app-container {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+#app {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+</style>

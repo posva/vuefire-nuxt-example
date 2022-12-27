@@ -8,3 +8,4 @@ node_modules
 dist
 yalc.lock
 .yalc
+.firebase

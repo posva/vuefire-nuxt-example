@@ -4,7 +4,7 @@ export const googleAuthProvider = new GoogleAuthProvider()
 </script>
 
 <script lang="ts" setup>
-import { signInWithRedirect, signOut, getRedirectResult } from 'firebase/auth'
+import { signInWithRedirect, signOut } from 'firebase/auth'
 import { useCurrentUser, useFirebaseAuth } from 'vuefire'
 
 definePageMeta({
@@ -17,11 +17,6 @@ const user = useCurrentUser()
 function signinRedirect() {
   signInWithRedirect(auth, googleAuthProvider)
 }
-
-const route = useRoute()
-onMounted(() => {
-  // TODO: redirect to page if logged in
-})
 </script>
 
 <template>

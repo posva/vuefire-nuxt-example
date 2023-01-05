@@ -1,9 +1,22 @@
 <script lang="ts" setup>
+import {
+  addDoc,
+  doc,
+  getDoc,
+  serverTimestamp,
+  setDoc,
+  updateDoc,
+} from 'firebase/firestore'
+
+const db = useFirestore()
 const user = useCurrentUser()
 
 const router = useRouter()
 const route = useRoute()
-watch(user, (currentUser, previousUser) => {
+watch(user, async (currentUser, previousUser) => {
+  if (currentUser) {
+    addDoc
+  }
   // redirect to login if they logout
   if (!currentUser && previousUser) {
     return router.push({ name: 'login' })
@@ -11,6 +24,28 @@ watch(user, (currentUser, previousUser) => {
   // redirect the user if they are logged in but were rejected because the user wasn't ready yet
   if (currentUser && typeof route.query.redirect === 'string') {
     return router.push(route.query.redirect)
+  }
+
+  // update user info
+  if (currentUser) {
+    console.log('Updating user info...')
+    const userDoc = doc(db, 'users', currentUser.uid)
+    const userData = {
+      displayName: currentUser.displayName,
+      photoURL: currentUser.photoURL,
+      lastLogin: serverTimestamp(),
+    }
+    const existingUser = await getDoc(userDoc)
+
+    if (existingUser.exists()) {
+      await updateDoc(userDoc, userData)
+    } else {
+      await setDoc(userDoc, {
+        ...userData,
+        joinedAt: serverTimestamp(),
+      })
+    }
+    console.log('User updated')
   }
 })
 </script>

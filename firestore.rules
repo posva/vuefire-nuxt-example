@@ -4,7 +4,27 @@ service cloud.firestore {
 
     // unused
 		match /users/{userId} {
-      allow read: if request.auth.uid;
+      allow read: if request.auth != null;
+
+      allow create: if request.auth.uid == userId
+      && request.resource.data.keys().hasAll(['displayName', 'photoURL', 'joinedAt', 'lastLogin'])
+      && request.resource.data.photoURL is string
+      && request.resource.data.displayName is string
+      && request.resource.data.joinedAt == request.time
+      && request.resource.data.lastLogin == request.time
+			;
+
+      allow update: if request.auth.uid == userId
+      && request.resource.data
+        .diff(resource.data)
+        .affectedKeys()
+        .hasOnly(['displayName', 'photoURL', 'lastLogin'])
+      && request.resource.data.photoURL is string
+      && request.resource.data.displayName is string
+      && request.resource.data.lastLogin == request.time
+      ;
+
+      allow delete: if false;
     }
 
     match /users/{userId}/notes/{noteId} {

@@ -6,6 +6,12 @@ export default defineNuxtConfig({
   // temporary, otherwise fails with vite error but this is not enough because we haven't added admin credentials
   ssr: false,
 
+  app: {
+    head: {
+      title: 'Nuxt + VueFire',
+    },
+  },
+
   // nitro: {
   //   prerender: {
   //     crawlLinks: false,

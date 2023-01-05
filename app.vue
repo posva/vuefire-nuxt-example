@@ -4,9 +4,11 @@ const user = useCurrentUser()
 const router = useRouter()
 const route = useRoute()
 watch(user, (currentUser, previousUser) => {
+  // redirect to login if they logout
   if (!currentUser && previousUser) {
     return router.push({ name: 'login' })
   }
+  // redirect the user if they are logged in but were rejected because the user wasn't ready yet
   if (currentUser && typeof route.query.redirect === 'string') {
     return router.push(route.query.redirect)
   }

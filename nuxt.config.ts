@@ -14,6 +14,11 @@ export default defineNuxtConfig({
           href: 'https://cdn.jsdelivr.net/npm/water.css@2/out/water.css',
           rel: 'stylesheet',
         },
+        {
+          rel: 'icon',
+          type: 'image/svg+xml',
+          href: '/vuefire.svg',
+        },
       ],
     },
   },

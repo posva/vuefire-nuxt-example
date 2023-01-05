@@ -11,15 +11,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+
+  --links: #00dc82;
+  --code: currentColor;
 }
 
 a {
   font-weight: 500;
-  color: #00dc82;
   text-decoration: inherit;
 }
 a:hover {
   color: #4de7a8;
+  text-decoration: inherit;
 }
 
 h1 {

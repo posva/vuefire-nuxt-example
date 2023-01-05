@@ -29,6 +29,8 @@ import HelloWorld from '../components/HelloWorld.vue'
   height: 6em;
   padding: 1.5em;
   will-change: filter;
+
+  transition: filter ease-out 0.3s;
 }
 .logo.vuefire {
   height: 7.5em;

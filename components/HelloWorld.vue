@@ -102,4 +102,8 @@ function fromNow(date: Timestamp) {
 .read-the-docs {
   color: #888;
 }
+
+.card {
+  padding: 2em;
+}
 </style>

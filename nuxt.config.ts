@@ -9,6 +9,12 @@ export default defineNuxtConfig({
   app: {
     head: {
       title: 'Nuxt + VueFire',
+      link: [
+        {
+          href: 'https://cdn.jsdelivr.net/npm/water.css@2/out/water.css',
+          rel: 'stylesheet',
+        },
+      ],
     },
   },
 

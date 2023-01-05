@@ -104,6 +104,6 @@ function fromNow(date: Timestamp) {
 }
 
 .card {
-  padding: 2em;
+  padding: 2em 0;
 }
 </style>

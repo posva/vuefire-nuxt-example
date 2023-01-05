@@ -4,8 +4,19 @@ service cloud.firestore {
 
     // unused
 		match /users/{userId} {
-      allow read;
-      // allow write: if request.auth.uid == userId && resource.data.size() == 1 && resource.data.lastConnection == request.time;
+      allow read: if request.auth.uid;
+    }
+
+    match /users/{userId}/notes/{noteId} {
+      // only the current user can read their own
+      allow read: if request.auth.uid == userId;
+      allow create: if request.auth.uid == userId
+      && request.resource.data.size() == 2
+      && request.resource.data.createdAt == request.time
+      && request.resource.data.content is string
+      && request.resource.data.content.size() > 0
+      && request.resource.data.content.size() <= 512;
+      allow delete: if false;
     }
 
     match /count/{day} {

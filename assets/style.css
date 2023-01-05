@@ -29,3 +29,25 @@ h1 {
   font-size: 3.2em;
   line-height: 1.1;
 }
+
+.error-message {
+  background-color: var(--background-alt);
+  padding: 0.2em 1em;
+  padding-left: 1.5em;
+  margin: 1em 0;
+  border-radius: 1em;
+
+  position: relative;
+}
+
+.error-message::after {
+  content: '';
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: 0;
+  background-color: crimson;
+  width: 10px;
+  height: 100%;
+  border-radius: 1em 0 0 1em;
+}

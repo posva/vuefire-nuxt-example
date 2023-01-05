@@ -1,5 +1,8 @@
 <script setup lang="ts">
-// no need to import
+definePageMeta({
+  linkTitle: 'Home',
+  order: 0,
+})
 </script>
 
 <template>

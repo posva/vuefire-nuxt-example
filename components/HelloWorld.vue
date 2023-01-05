@@ -70,8 +70,6 @@ function fromNow(date: Timestamp) {
 </script>
 
 <template>
-  <h1>Nuxt + VueFire</h1>
-
   <div class="card">
     <p v-if="pending">Loading...</p>
     <template v-else>

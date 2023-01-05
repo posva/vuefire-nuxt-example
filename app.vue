@@ -1,3 +1,18 @@
+<script lang="ts" setup>
+const user = useCurrentUser()
+
+const router = useRouter()
+const route = useRoute()
+watch(user, (currentUser, previousUser) => {
+  if (!currentUser && previousUser) {
+    return router.push({ name: 'login' })
+  }
+  if (currentUser && typeof route.query.redirect === 'string') {
+    return router.push(route.query.redirect)
+  }
+})
+</script>
+
 <template>
   <div>
     <a href="https://nuxt.com" target="_blank">
@@ -7,6 +22,10 @@
       <img src="/vuefire.svg" class="logo vuefire" alt="VueFire logo" />
     </a>
   </div>
+
+  <h1>Nuxt + VueFire</h1>
+
+  <NavigationLinks />
 
   <NuxtPage />
 

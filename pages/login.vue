@@ -42,6 +42,9 @@ onMounted(() => {
 
       <button @click="signOut(auth)">Logout</button>
     </template>
+    <template v-else-if="user === undefined">
+      <p>Loading...</p>
+    </template>
     <template v-else>
       <button @click="signinRedirect()">Signin with Google</button>
     </template>

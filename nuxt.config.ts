@@ -23,12 +23,12 @@ export default defineNuxtConfig({
     },
   },
 
-  // nitro: {
-  //   prerender: {
-  //     crawlLinks: false,
-  //     routes: [],
-  //   },
-  // },
+  nitro: {
+    prerender: {
+      crawlLinks: false,
+      routes: ['/'],
+    },
+  },
 
   css: ['@/assets/style.css'],
 

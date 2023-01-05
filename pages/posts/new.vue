@@ -15,27 +15,27 @@ const user = useCurrentUser()
 const db = useFirestore()
 
 definePageMeta({
-  linkTitle: 'New Post',
+  linkTitle: 'New Note',
   order: 3,
   // only authenticated users can access this page
   middleware: ['authenticated'],
 })
 
-const content = useLocalStorage('post-content', '')
+const content = useLocalStorage('note-content', '')
 
-const lastPosts = useCollection<{ content: string; createdAt: Timestamp }>(
+const lastNotes = useCollection<{ content: string; createdAt: Timestamp }>(
   query(
     collection(db, 'users', user.value!.uid, 'notes'),
     orderBy('createdAt', 'desc'),
     limit(5)
   ),
-  { ssrKey: 'last-posts' }
+  { ssrKey: 'last-notes' }
 )
 
 const {
-  execute: createPost,
-  isLoading: isSubmittingPost,
-  error: postError,
+  execute: createNote,
+  isLoading: isCreatingNote,
+  error,
 } = useAsyncState(
   () => {
     // avoid empty posts that will fail on Firestore anyway
@@ -47,55 +47,44 @@ const {
       content: content.value,
       createdAt: serverTimestamp(),
     }).then(() => {
-      console.log('done')
+      // reset the post content if successful
       content.value = ''
     })
   },
   null,
-  // must be executed
+  // avoid executing the function on mount
   { immediate: false }
 )
-
-const maxContentLength = 512
-const maxLengthColor = computed(() => {
-  if (content.value.length > maxContentLength * 0.9) return 'red'
-  if (content.value.length > maxContentLength * 0.8) return 'orange'
-})
 </script>
 
 <template>
   <main>
-    <h2>Create a new post</h2>
+    <h2>Create a new Note</h2>
 
-    <div v-if="postError" class="error-message">
-      <p><strong>Error:</strong> {{ postError.message }}</p>
+    <div v-if="error" class="error-message">
+      <p><strong>Error:</strong> {{ error.message }}</p>
     </div>
-    <form @submit.prevent="createPost()">
-      <fieldset :disabled="isSubmittingPost">
-        <label for="content">Post</label>
-        <textarea
+
+    <form @submit.prevent="createNote()">
+      <fieldset :disabled="isCreatingNote">
+        <MyTextarea
           id="content"
           placeholder="The other day I was..."
-          :value="content"
-          @input="content = $event.target.value"
-          :maxlength="maxContentLength"
+          v-model="content"
+          :maxlength="512"
           required
-        ></textarea>
+        />
 
-        <div class="max-length" :class="maxLengthColor">
-          {{ content.length }} / {{ maxContentLength }}
-        </div>
-
-        <input type="submit" value="Create Post" />
+        <input type="submit" value="Save Note" />
       </fieldset>
     </form>
 
     <section>
-      <h3>Last posts</h3>
-      <ul v-if="lastPosts">
-        <li v-for="post in lastPosts" :key="post.id">
+      <h3>Last Notes</h3>
+      <ul v-if="lastNotes">
+        <li v-for="note in lastNotes" :key="note.id">
           <span
-            >{{ post.content }} - {{ post.createdAt.toDate().toISOString() }}
+            >{{ note.content }} - {{ note.createdAt.toDate().toISOString() }}
           </span>
         </li>
       </ul>
@@ -104,19 +93,7 @@ const maxLengthColor = computed(() => {
 </template>
 
 <style scoped>
-.max-length {
-  font-size: 0.7rem;
-  text-align: right;
-}
-
 fieldset {
   border: none;
-}
-
-.red {
-  color: crimson;
-}
-.orange {
-  color: orange;
 }
 </style>

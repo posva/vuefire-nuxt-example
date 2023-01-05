@@ -70,7 +70,7 @@ function fromNow(date: Timestamp) {
 </script>
 
 <template>
-  <h1>Vite + VueFire</h1>
+  <h1>Nuxt + VueFire</h1>
 
   <div class="card">
     <p v-if="pending">Loading...</p>
@@ -95,7 +95,7 @@ function fromNow(date: Timestamp) {
     <a href="https://vuefire.vuejs.org" target="_blank">VueFire docs</a> to
     learn more
   </p>
-  <p class="read-the-docs">Or click on the Vite and VueFire logos</p>
+  <p class="read-the-docs">Or click on the Nuxt and VueFire logos</p>
 </template>
 
 <style scoped>

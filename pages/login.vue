@@ -36,16 +36,9 @@ function signinPopup() {
 const error = ref<Error | null>(null)
 // only on client side
 onMounted(() => {
-  getRedirectResult(auth)
-    .then((result) => {
-      if (!result?.user) {
-        // user is logged in
-        error.value = new Error((result as any) ?? 'No result')
-      }
-    })
-    .catch((reason) => {
-      error.value = reason
-    })
+  getRedirectResult(auth).catch((reason) => {
+    error.value = reason
+  })
 })
 
 const route = useRoute()

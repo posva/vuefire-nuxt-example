@@ -6,6 +6,14 @@ export default defineNuxtConfig({
   // temporary, otherwise fails with vite error but this is not enough because we haven't added admin credentials
   ssr: false,
 
+  nitro: {
+    prerender: {
+      crawlLinks: false,
+      routes: ['/'],
+      ignore: ['/posts/others'],
+    },
+  },
+
   app: {
     head: {
       title: 'Nuxt + VueFire',
@@ -20,13 +28,6 @@ export default defineNuxtConfig({
           href: '/vuefire.svg',
         },
       ],
-    },
-  },
-
-  nitro: {
-    prerender: {
-      crawlLinks: false,
-      routes: ['/'],
     },
   },
 

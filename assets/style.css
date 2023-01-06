@@ -31,11 +31,13 @@ h1 {
 }
 
 .error-message {
+  --border-radius: 8px;
+
   background-color: var(--background-alt);
   padding: 0.2em 1em;
-  padding-left: 1.5em;
-  margin: 1em 0;
-  border-radius: 1em;
+  padding-left: calc(var(--border-radius) + 0.75em);
+  margin: var(--border-radius) 0;
+  border-radius: var(--border-radius);
 
   position: relative;
 }
@@ -47,7 +49,11 @@ h1 {
   left: 0;
   top: 0;
   background-color: crimson;
-  width: 10px;
+  width: var(--border-radius);
   height: 100%;
-  border-radius: 1em 0 0 1em;
+  border-radius: var(--border-radius) 0 0 var(--border-radius);
+}
+
+.error-message details {
+  border: solid 2px var(--background);
 }

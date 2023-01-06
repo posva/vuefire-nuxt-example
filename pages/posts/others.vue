@@ -4,6 +4,7 @@ import { collection } from 'firebase/firestore'
 definePageMeta({
   linkTitle: 'Others',
   order: 5,
+  middleware: ['authenticated'],
 })
 
 const db = useFirestore()

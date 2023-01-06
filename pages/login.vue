@@ -20,10 +20,13 @@ definePageMeta({
 const auth = useFirebaseAuth()! // only exists on client side
 const user = useCurrentUser()
 function signinRedirect() {
-  signInWithRedirect(auth, googleAuthProvider)
+  signInWithRedirect(auth, googleAuthProvider).catch((reason) => {
+    error.value = reason
+  })
 }
 
 function signinPopup() {
+  error.value = null
   signInWithPopup(auth, googleAuthProvider).catch((reason) => {
     error.value = reason
   })
@@ -33,9 +36,16 @@ function signinPopup() {
 const error = ref<Error | null>(null)
 // only on client side
 onMounted(() => {
-  getRedirectResult(auth).catch((reason) => {
-    error.value = reason
-  })
+  getRedirectResult(auth)
+    .then((result) => {
+      if (!result?.user) {
+        // user is logged in
+        error.value = new Error((result as any) ?? 'No result')
+      }
+    })
+    .catch((reason) => {
+      error.value = reason
+    })
 })
 
 const route = useRoute()

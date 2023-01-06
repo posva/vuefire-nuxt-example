@@ -43,38 +43,41 @@ const route = useRoute()
 
 <template>
   <main>
-    <ErrorBox v-if="error" :error="error" />
-
-    <div v-else-if="route.query.redirect" class="message-box">
-      <p>
-        Please login to access <code>{{ route.query.redirect }}</code
-        >.
-      </p>
-    </div>
-
-    <template v-if="user">
-      <p>
-        You are currently logged in as:
-        <br />
-        <img
-          class="avatar"
-          v-if="user.photoURL"
-          :src="user.photoURL"
-          referrerpolicy="no-referrer"
-        />
-        <br />
-        <strong>{{ user.displayName }}.</strong>
-      </p>
-
-      <button @click="signOut(auth)">Logout</button>
-    </template>
-
-    <template v-else-if="user === undefined">
+    <template v-if="user === undefined">
       <p>Loading...</p>
     </template>
-
     <template v-else>
-      <button @click="signinRedirect()">Signin with Google</button>
+      <ErrorBox v-if="error" :error="error" />
+
+      <div v-else-if="route.query.redirect" class="message-box">
+        <p>
+          Please login to access <code>{{ route.query.redirect }}</code
+          >.
+        </p>
+      </div>
+
+      <template v-if="user">
+        <p>
+          You are currently logged in as:
+          <br />
+          <img
+            class="avatar"
+            v-if="user.photoURL"
+            :src="user.photoURL"
+            referrerpolicy="no-referrer"
+          />
+          <br />
+          <strong>{{ user.displayName }}.</strong>
+        </p>
+
+        <button @click="signOut(auth)">Logout</button>
+      </template>
+
+      <template v-else>
+        <button @click="signinRedirect()">SignIn with Google (redirect)</button>
+        <br />
+        <button @click="signinPopup()">SignIn with Google (popup)</button>
+      </template>
     </template>
   </main>
 </template>

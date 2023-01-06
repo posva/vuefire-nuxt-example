@@ -4,7 +4,12 @@ export const googleAuthProvider = new GoogleAuthProvider()
 </script>
 
 <script lang="ts" setup>
-import { signInWithRedirect, signOut } from 'firebase/auth'
+import {
+  getRedirectResult,
+  signInWithPopup,
+  signInWithRedirect,
+  signOut,
+} from 'firebase/auth'
 import { useCurrentUser, useFirebaseAuth } from 'vuefire'
 
 definePageMeta({
@@ -17,10 +22,36 @@ const user = useCurrentUser()
 function signinRedirect() {
   signInWithRedirect(auth, googleAuthProvider)
 }
+
+function signinPopup() {
+  signInWithPopup(auth, googleAuthProvider).catch((reason) => {
+    error.value = reason
+  })
+}
+
+// display errors if any
+const error = ref<Error | null>(null)
+// only on client side
+onMounted(() => {
+  getRedirectResult(auth).catch((reason) => {
+    error.value = reason
+  })
+})
+
+const route = useRoute()
 </script>
 
 <template>
   <main>
+    <ErrorBox v-if="error" :error="error" />
+
+    <div v-else-if="route.query.redirect" class="message-box">
+      <p>
+        Please login to access <code>{{ route.query.redirect }}</code
+        >.
+      </p>
+    </div>
+
     <template v-if="user">
       <p>
         You are currently logged in as:
@@ -37,9 +68,11 @@ function signinRedirect() {
 
       <button @click="signOut(auth)">Logout</button>
     </template>
+
     <template v-else-if="user === undefined">
       <p>Loading...</p>
     </template>
+
     <template v-else>
       <button @click="signinRedirect()">Signin with Google</button>
     </template>

@@ -30,7 +30,7 @@ h1 {
   line-height: 1.1;
 }
 
-.error-message {
+.message-box {
   --border-radius: 8px;
 
   background-color: var(--background-alt);
@@ -42,18 +42,14 @@ h1 {
   position: relative;
 }
 
-.error-message::after {
+.message-box::after {
   content: '';
   position: absolute;
   z-index: 2;
   left: 0;
   top: 0;
-  background-color: crimson;
+  background-color: azure;
   width: var(--border-radius);
   height: 100%;
   border-radius: var(--border-radius) 0 0 var(--border-radius);
-}
-
-.error-message details {
-  border: solid 2px var(--background);
 }

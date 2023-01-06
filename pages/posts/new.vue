@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import type { FirebaseError } from 'firebase/app'
 import { useLocalStorage, useAsyncState } from '@vueuse/core'
 import {
   addDoc,
@@ -62,13 +61,7 @@ const {
   <main>
     <h2>Create a new Note</h2>
 
-    <div v-if="error" class="error-message">
-      <p><strong>Error:</strong> {{ (error as FirebaseError).name }}</p>
-      <details>
-        <summary>Details</summary>
-        <pre>{{ error }}</pre>
-      </details>
-    </div>
+    <ErrorBox v-if="error" :error="error" />
 
     <form @submit.prevent="createNote()">
       <fieldset :disabled="isCreatingNote">

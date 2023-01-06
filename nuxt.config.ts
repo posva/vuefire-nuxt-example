@@ -37,7 +37,7 @@ export default defineNuxtConfig({
     auth: true,
     config: {
       apiKey: 'AIzaSyCvPJk1gTgga_H7SS6YKgQTSBwBYWzwWBE',
-      authDomain: 'vuefire-nuxt.firebaseapp.com',
+      authDomain: 'nuxtparaeduardo.firebaseapp.com',
       projectId: 'nuxtparaeduardo',
       storageBucket: 'nuxtparaeduardo.appspot.com',
       messagingSenderId: '817686702603',

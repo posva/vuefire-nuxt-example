@@ -7,21 +7,21 @@ service cloud.firestore {
       allow read: if request.auth != null;
 
       allow create: if request.auth.uid == userId
-      && request.resource.data.keys().hasAll(['displayName', 'photoURL', 'joinedAt', 'lastLogin'])
-      && request.resource.data.photoURL is string
-      && request.resource.data.displayName is string
-      && request.resource.data.joinedAt == request.time
-      && request.resource.data.lastLogin == request.time
+        && request.resource.data.keys().hasAll(['displayName', 'photoURL', 'joinedAt', 'lastLogin'])
+        && request.resource.data.photoURL is string
+        && request.resource.data.displayName is string
+        && request.resource.data.joinedAt == request.time
+        && request.resource.data.lastLogin == request.time
 			;
 
       allow update: if request.auth.uid == userId
-      && request.resource.data
-        .diff(resource.data)
-        .affectedKeys()
-        .hasOnly(['displayName', 'photoURL', 'lastLogin'])
-      && request.resource.data.photoURL is string
-      && request.resource.data.displayName is string
-      && request.resource.data.lastLogin == request.time
+        && request.resource.data
+          .diff(resource.data)
+          .affectedKeys()
+          .hasOnly(['displayName', 'photoURL', 'lastLogin'])
+        && request.resource.data.photoURL is string
+        && request.resource.data.displayName is string
+        && request.resource.data.lastLogin == request.time
       ;
 
       allow delete: if false;
@@ -31,13 +31,48 @@ service cloud.firestore {
       // only the current user can read their own
       allow read: if request.auth.uid == userId;
       allow create: if request.auth.uid == userId
-      && request.resource.data.size() == 2
-      && request.resource.data.createdAt == request.time
-      && request.resource.data.content is string
-      && request.resource.data.content.size() > 0
-      && request.resource.data.content.size() <= 512;
+        && request.resource.data.size() == 2
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.content is string
+        && request.resource.data.content.size() > 0
+        && request.resource.data.content.size() <= 512;
       allow delete: if false;
     }
+
+		match /pixels/{userId} {
+      allow read;
+      allow create: if request.auth.uid == userId
+        && ['displayName', 'photoURL', 'createdAt', 'content', 'pos', 'revision']
+          .toSet()
+          .difference(request.resource.data.keys().toSet())
+          .size() == 0
+        && request.resource.data.photoURL is string
+        && request.resource.data.displayName is string
+        && request.resource.data.pos is int
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.revision == 1
+        && request.resource.data.content is string
+        && request.resource.data.content.size() <= 2
+      ;
+
+      allow update: if request.auth.uid == userId
+        && ['createdAt', 'content', 'pos', 'revision']
+          .toSet()
+          .difference(request.resource.data.keys().toSet())
+          .size() == 0
+        && request.resource.data.createdAt == request.time
+        // only allow one write every 5 seconds
+        && request.time > resource.data.createdAt + duration.value(5, 's')
+        && request.resource.data.pos is int
+        // only allow increments
+        && request.resource.data.revision == resource.data.revision + 1
+        && request.resource.data.content is string
+        && request.resource.data.content.size() <= 2
+      ;
+
+      allow delete: if request.auth.uid == userId;
+    }
+
 
     match /count/{day} {
     	allow read;

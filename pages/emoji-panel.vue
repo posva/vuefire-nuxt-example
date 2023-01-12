@@ -2,7 +2,6 @@
 import {
   collection,
   doc,
-  getDoc,
   increment,
   orderBy,
   query,
@@ -11,8 +10,10 @@ import {
   Timestamp,
   updateDoc,
 } from 'firebase/firestore'
+import { signOut } from 'firebase/auth'
 import { getRandomEmoji } from '@/assets/emojis'
-import { useInterval } from '@vueuse/core'
+import { useTimeout } from '@vueuse/core'
+import { VueFirestoreDocumentData } from 'vuefire'
 
 definePageMeta({
   linkTitle: 'Emoji Panel',
@@ -28,10 +29,15 @@ interface PanelEmoji {
   pos: number
   revision: number
 }
+type PanelEmojiWithId = VueFirestoreDocumentData<PanelEmoji>
 
 const db = useFirestore()
 const user = useCurrentUser()
+const auth = useFirebaseAuth()!
 const emojisRef = collection(db, 'pixels')
+
+const WIDTH = 15
+const HEIGHT = 15
 
 const emojis = useCollection<PanelEmoji>(
   query(emojisRef, orderBy('createdAt', 'desc')),
@@ -40,62 +46,66 @@ const emojis = useCollection<PanelEmoji>(
   }
 )
 
-const myEmojiRef = computed(() => doc(emojisRef, user.value!.uid))
-const myEmoji = useDocument<PanelEmoji>(myEmojiRef)
+// good part of vue: easy to rework the data
+const emojisByPos = computed(() => {
+  const result: PanelEmojiWithId[] = Array(WIDTH * HEIGHT)
+  emojis.value.forEach((emoji) => {
+    result[emoji.pos] = emoji
+  })
 
-const elapsedSeconds = useInterval(1000)
-const now = Date.now()
-const canCreateNewEmoji = computed(() => {
-  if (!myEmoji.value) return true
-  return (
-    now + elapsedSeconds.value * 1000 - myEmoji.value.createdAt.toMillis() >=
-    5000
-  )
+  return result
 })
 
 const lastCreatedEmoji = computed(() => emojis.value.at(0))
-
 const lastCreatedEmojiCreatedAt = computed(
   () => lastCreatedEmoji.value?.createdAt
 )
-
 const lastCreationRelativeTime = useRelativeTime(lastCreatedEmojiCreatedAt)
 
-function getEmojiByPos(i: number): PanelEmoji | undefined {
-  return emojis.value.find((p) => p.pos === i)
-}
+const myEmojiRef = computed(() => user.value && doc(emojisRef, user.value.uid))
+const myEmoji = useDocument<PanelEmoji>(myEmojiRef)
 
-const WIDTH = 15
-const HEIGHT = 15
+const { ready: canCreateNewEmoji, start } = useTimeout(5000, {
+  controls: true,
+  immediate: false,
+  callback: () => {
+    newContent.value = getRandomEmoji()
+  },
+})
+
 const newContent = ref(getRandomEmoji())
 const currentHover = ref(-1)
+
 function generateNewContent(pos: number) {
   currentHover.value = pos
   newContent.value = getRandomEmoji()
 }
 
 async function createEmoji(pos: number) {
-  if (!user.value || !canCreateNewEmoji.value) return
-  const currentDoc = await getDoc(myEmojiRef.value)
+  if (!user.value || !canCreateNewEmoji.value || !myEmojiRef.value) return
 
   try {
-    if (currentDoc.exists()) {
+    // check if the user already created an emoji before
+    if (myEmoji.value != null) {
       await updateDoc(myEmojiRef.value, {
         createdAt: serverTimestamp(),
-        content: newContent.value,
-        pos,
         revision: increment(1),
+        pos,
+        content: newContent.value,
       })
     } else {
       await setDoc(myEmojiRef.value, {
-        content: newContent.value,
+        displayName: user.value.displayName || 'anonymous',
+        photoURL: user.value.photoURL || '',
         createdAt: serverTimestamp(),
-        displayName: user.value.displayName,
-        photoURL: user.value.photoURL,
-        pos,
         revision: increment(1),
+        pos,
+        content: newContent.value,
       })
     }
+
+    // wait 5s before allowing a new creation
+    start()
   } catch (error) {
     console.error(error)
   }
@@ -108,10 +118,18 @@ async function createEmoji(pos: number) {
 
     <p>
       Currently we have
-      <strong>{{ emojis.length }}</strong> contribution{{
-        emojis.length == 1 ? '' : 's'
-      }}.
+      <strong
+        >{{ emojis.length }} contribution{{
+          emojis.length == 1 ? '' : 's'
+        }}</strong
+      >.
       <br />
+
+      <template v-if="myEmoji"
+        >Your last emoji is {{ myEmoji.content }} after
+        {{ myEmoji.revision }} updates.
+        <br />
+      </template>
 
       <template v-if="!canCreateNewEmoji">
         You added an emoji less than 5 seconds ago. Wait a bit to create a new
@@ -126,25 +144,34 @@ async function createEmoji(pos: number) {
       <img
         class="mini-avatar"
         referrerpolicy="no-referrer"
-        :src="lastCreatedEmoji.photoURL"
+        :src="
+          lastCreatedEmoji.photoURL ||
+          `https://i.pravatar.cc/150?u=${lastCreatedEmoji.id}`
+        "
         :alt="lastCreatedEmoji.displayName"
       />
-      created {{ lastCreatedEmoji.content }} {{ lastCreationRelativeTime }}
+      created {{ lastCreatedEmoji.content }}
+      <strong>{{ lastCreationRelativeTime }}</strong> after
+      {{ lastCreatedEmoji.revision }} updates.
     </p>
 
     <div class="emoji-grid">
       <div
         role="button"
         class="emoji-button"
-        v-for="i in WIDTH * HEIGHT"
-        @click="createEmoji(i)"
-        @mouseenter="generateNewContent(i)"
+        :class="{ 'emoji-button--mine': emoji && emoji.id === user?.uid }"
+        :data-uid="JSON.stringify({ id: myEmoji?.id, uid: user?.uid })"
+        v-for="(emoji, pos) in emojisByPos"
+        @click="createEmoji(pos)"
+        @mouseenter="generateNewContent(pos)"
         @mouseleave="currentHover = -1"
         :aria-disabled="!canCreateNewEmoji"
       >
-        {{ currentHover === i ? newContent : getEmojiByPos(i)?.content }}
+        {{ currentHover === pos ? newContent : emoji?.content }}
       </div>
     </div>
+
+    <button @click="signOut(auth)">Logout</button>
   </main>
 </template>
 
@@ -156,7 +183,7 @@ async function createEmoji(pos: number) {
   max-width: 100%;
   height: auto;
   vertical-align: middle;
-  margin-right: 0.8em;
+  margin-right: 0.3em;
 }
 
 .emoji-grid {
@@ -180,6 +207,10 @@ async function createEmoji(pos: number) {
   transition: background-color 0.3s ease;
   border-radius: 5px;
   border: solid 1px var(--border);
+}
+
+.emoji-button--mine {
+  background-color: var(--highlight);
 }
 
 .emoji-button:hover {

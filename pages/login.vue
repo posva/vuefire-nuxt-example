@@ -6,6 +6,7 @@ export const googleAuthProvider = new GoogleAuthProvider()
 <script lang="ts" setup>
 import {
   getRedirectResult,
+  signInAnonymously,
   signInWithPopup,
   signInWithRedirect,
   signOut,
@@ -80,6 +81,8 @@ const route = useRoute()
         <button @click="signinRedirect()">SignIn with Google (redirect)</button>
         <br />
         <button @click="signinPopup()">SignIn with Google (popup)</button>
+        <br />
+        <button @click="signInAnonymously(auth)">SignIn Anonymously</button>
       </template>
     </template>
   </main>

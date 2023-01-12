@@ -27,7 +27,7 @@ watch(user, async (currentUser, previousUser) => {
   }
 
   // update user info
-  if (currentUser) {
+  if (currentUser && !currentUser.isAnonymous) {
     console.log('Updating user info...')
     const userDoc = doc(db, 'users', currentUser.uid)
     const userData = {

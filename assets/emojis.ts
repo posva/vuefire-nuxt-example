@@ -821,5 +821,5 @@ export const emojis = [
 ]
 
 export function getRandomEmoji() {
-  return emojis.at(Math.floor(Math.random() * emojis.length))
+  return emojis.at(Math.floor(Math.random() * emojis.length))!
 }

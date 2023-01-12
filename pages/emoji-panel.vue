@@ -15,12 +15,12 @@ import { getRandomEmoji } from '@/assets/emojis'
 import { useInterval } from '@vueuse/core'
 
 definePageMeta({
-  linkTitle: 'Pixel Panel',
+  linkTitle: 'Emoji Panel',
   order: 6,
   middleware: ['authenticated'],
 })
 
-interface PanelPixel {
+interface PanelEmoji {
   content: string
   createdAt: Timestamp
   displayName: string
@@ -31,39 +31,38 @@ interface PanelPixel {
 
 const db = useFirestore()
 const user = useCurrentUser()
-const pixelsRef = collection(db, 'pixels')
+const emojisRef = collection(db, 'pixels')
 
-const myPixelRef = computed(() => doc(pixelsRef, user.value!.uid))
-
-const pixels = useCollection<PanelPixel>(
-  query(pixelsRef, orderBy('createdAt', 'desc')),
+const emojis = useCollection<PanelEmoji>(
+  query(emojisRef, orderBy('createdAt', 'desc')),
   {
-    ssrKey: 'pixels',
+    ssrKey: 'emojis',
   }
 )
 
-const myPixel = useDocument<PanelPixel>(myPixelRef)
+const myEmojiRef = computed(() => doc(emojisRef, user.value!.uid))
+const myEmoji = useDocument<PanelEmoji>(myEmojiRef)
 
 const elapsedSeconds = useInterval(1000)
 const now = Date.now()
-const canCreateNewPixel = computed(() => {
-  if (!myPixel.value) return true
+const canCreateNewEmoji = computed(() => {
+  if (!myEmoji.value) return true
   return (
-    now + elapsedSeconds.value * 1000 - myPixel.value.createdAt.toMillis() >=
+    now + elapsedSeconds.value * 1000 - myEmoji.value.createdAt.toMillis() >=
     5000
   )
 })
 
-const lastCreatedPixel = computed(() => pixels.value.at(0))
+const lastCreatedEmoji = computed(() => emojis.value.at(0))
 
-const lastCreatedPixelCreatedAt = computed(
-  () => lastCreatedPixel.value?.createdAt
+const lastCreatedEmojiCreatedAt = computed(
+  () => lastCreatedEmoji.value?.createdAt
 )
 
-const lastCreationRelativeTime = useRelativeTime(lastCreatedPixelCreatedAt)
+const lastCreationRelativeTime = useRelativeTime(lastCreatedEmojiCreatedAt)
 
-function getPixelByPos(i: number): PanelPixel | undefined {
-  return pixels.value.find((p) => p.pos === i)
+function getEmojiByPos(i: number): PanelEmoji | undefined {
+  return emojis.value.find((p) => p.pos === i)
 }
 
 const WIDTH = 15
@@ -75,20 +74,20 @@ function generateNewContent(pos: number) {
   newContent.value = getRandomEmoji()
 }
 
-async function createPixel(pos: number) {
-  if (!user.value || !canCreateNewPixel.value) return
-  const currentDoc = await getDoc(myPixelRef.value)
+async function createEmoji(pos: number) {
+  if (!user.value || !canCreateNewEmoji.value) return
+  const currentDoc = await getDoc(myEmojiRef.value)
 
   try {
     if (currentDoc.exists()) {
-      await updateDoc(myPixelRef.value, {
+      await updateDoc(myEmojiRef.value, {
         createdAt: serverTimestamp(),
         content: newContent.value,
         pos,
         revision: increment(1),
       })
     } else {
-      await setDoc(myPixelRef.value, {
+      await setDoc(myEmojiRef.value, {
         content: newContent.value,
         createdAt: serverTimestamp(),
         displayName: user.value.displayName,
@@ -105,16 +104,16 @@ async function createPixel(pos: number) {
 
 <template>
   <main>
-    <h2>Pixel Panel</h2>
+    <h2>Emoji Panel</h2>
 
     <p>
       Currently we have
-      <strong>{{ pixels.length }}</strong> contribution{{
-        pixels.length == 1 ? '' : 's'
+      <strong>{{ emojis.length }}</strong> contribution{{
+        emojis.length == 1 ? '' : 's'
       }}.
       <br />
 
-      <template v-if="!canCreateNewPixel">
+      <template v-if="!canCreateNewEmoji">
         You added an emoji less than 5 seconds ago. Wait a bit to create a new
         one 😊
       </template>
@@ -123,27 +122,27 @@ async function createPixel(pos: number) {
       </template>
     </p>
 
-    <p v-if="lastCreatedPixel">
+    <p v-if="lastCreatedEmoji">
       <img
         class="mini-avatar"
         referrerpolicy="no-referrer"
-        :src="lastCreatedPixel.photoURL"
-        :alt="lastCreatedPixel.displayName"
+        :src="lastCreatedEmoji.photoURL"
+        :alt="lastCreatedEmoji.displayName"
       />
-      created {{ lastCreatedPixel.content }} {{ lastCreationRelativeTime }}
+      created {{ lastCreatedEmoji.content }} {{ lastCreationRelativeTime }}
     </p>
 
-    <div class="pixel-grid">
+    <div class="emoji-grid">
       <div
         role="button"
-        class="pixel-button"
+        class="emoji-button"
         v-for="i in WIDTH * HEIGHT"
-        @click="createPixel(i)"
+        @click="createEmoji(i)"
         @mouseenter="generateNewContent(i)"
         @mouseleave="currentHover = -1"
-        :aria-disabled="!canCreateNewPixel"
+        :aria-disabled="!canCreateNewEmoji"
       >
-        {{ currentHover === i ? newContent : getPixelByPos(i)?.content }}
+        {{ currentHover === i ? newContent : getEmojiByPos(i)?.content }}
       </div>
     </div>
   </main>
@@ -160,7 +159,7 @@ async function createPixel(pos: number) {
   margin-right: 0.8em;
 }
 
-.pixel-grid {
+.emoji-grid {
   display: grid;
   grid-template-columns: repeat(v-bind(WIDTH), 1.2em);
   grid-template-rows: repeat(v-bind(HEIGHT), 1.2em);
@@ -170,11 +169,11 @@ async function createPixel(pos: number) {
   user-select: none;
 }
 
-.pixel-grid:hover {
+.emoji-grid:hover {
   cursor: crosshair;
 }
 
-.pixel-button {
+.emoji-button {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -183,10 +182,10 @@ async function createPixel(pos: number) {
   border: solid 1px var(--border);
 }
 
-.pixel-button:hover {
+.emoji-button:hover {
   background-color: var(--selection);
 }
-.pixel-button[aria-disabled='true']:hover {
+.emoji-button[aria-disabled='true']:hover {
   cursor: not-allowed;
 }
 </style>

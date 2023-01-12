@@ -73,6 +73,40 @@ service cloud.firestore {
       allow delete: if request.auth.uid == userId;
     }
 
+    match /emojis/{userId} {
+      allow read;
+      allow delete: if false;
+
+      allow create: if request.auth.uid == userId
+        && ['displayName', 'photoURL', 'createdAt', 'content', 'pos', 'revision']
+          .toSet()
+          .difference(request.resource.data.keys().toSet())
+          .size() == 0
+        && request.resource.data.photoURL is string
+        && request.resource.data.displayName is string
+        && request.resource.data.pos is int
+        && request.resource.data.createdAt == request.time
+        && request.resource.data.revision == 1
+        && request.resource.data.content is string
+        && request.resource.data.content.size() <= 2
+      ;
+
+      allow update: if request.auth.uid == userId
+        && ['createdAt', 'content', 'pos', 'revision']
+          .toSet()
+          .difference(request.resource.data.keys().toSet())
+          .size() == 0
+        && request.resource.data.createdAt == request.time
+        // only allow one write every 5 seconds
+        && request.time > resource.data.createdAt + duration.value(5, 's')
+        && request.resource.data.pos is int
+        // only allow increments
+        && request.resource.data.revision == resource.data.revision + 1
+        && request.resource.data.content is string
+        && request.resource.data.content.size() <= 2
+      ;
+    }
+
 
     match /count/{day} {
     	allow read;

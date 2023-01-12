@@ -47,29 +47,4 @@ export default defineNuxtConfig({
 
   // TODO: to add with ssr
   routeRules: {},
-
-  // workaround for vite
-  hooks: {
-    'vite:extendConfig': (viteInlineConfig, env) => {
-      viteInlineConfig.resolve ??= {}
-      viteInlineConfig.resolve.dedupe ??= []
-      const deps = [
-        // 'vuefire',
-        // 'nuxt-vuefire',
-        'firebase',
-        'firebase/app',
-        '@firebase/app',
-        'firebase/firestore',
-        '@firebase/firestore',
-        'firebase/auth',
-        '@firebase/auth',
-        '@firebase/component',
-      ]
-      viteInlineConfig.resolve.dedupe.push(...deps)
-
-      viteInlineConfig.optimizeDeps ??= {}
-      viteInlineConfig.optimizeDeps.exclude ??= []
-      viteInlineConfig.optimizeDeps.exclude.push(...deps)
-    },
-  },
 })

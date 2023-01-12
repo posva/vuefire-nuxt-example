@@ -12,7 +12,7 @@
     "firebase": "^9.15.0",
     "firebase-admin": "^11.4.1",
     "nuxt": "npm:nuxt3@3.0.1-rc.0-27889360.9de94c2",
-    "nuxt-vuefire": "^0.0.18",
+    "nuxt-vuefire": "^0.1.0",
     "vuefire": "^3.0.1"
   }
 }

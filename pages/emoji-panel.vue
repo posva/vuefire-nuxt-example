@@ -68,16 +68,12 @@ const myEmoji = useDocument<PanelEmoji>(myEmojiRef)
 const { ready: canCreateNewEmoji, start } = useTimeout(5000, {
   controls: true,
   immediate: false,
-  callback: () => {
-    newContent.value = getRandomEmoji()
-  },
 })
 
 const newContent = ref(getRandomEmoji())
 const currentHover = ref(-1)
 
-function generateNewContent(pos: number) {
-  currentHover.value = pos
+function generateNewContent() {
   newContent.value = getRandomEmoji()
 }
 
@@ -109,6 +105,7 @@ async function createEmoji(pos: number) {
   } catch (error) {
     console.error(error)
   }
+  currentHover.value = -1
 }
 </script>
 
@@ -136,9 +133,15 @@ async function createEmoji(pos: number) {
         one 😊
       </template>
       <template v-else>
-        Click on any box to add your very own emoji {{ newContent }}!
+        Click on any box to add your very own emoji!
+        <br />
+        Click to randomize:
       </template>
     </p>
+
+    <button @click="generateNewContent()" style="font-size: 2rem">
+      {{ newContent }}
+    </button>
 
     <p v-if="lastCreatedEmoji">
       <img
@@ -163,7 +166,7 @@ async function createEmoji(pos: number) {
         :data-uid="JSON.stringify({ id: myEmoji?.id, uid: user?.uid })"
         v-for="(emoji, pos) in emojisByPos"
         @click="createEmoji(pos)"
-        @mouseenter="generateNewContent(pos)"
+        @mouseover="canCreateNewEmoji && (currentHover = pos)"
         @mouseleave="currentHover = -1"
         :aria-disabled="!canCreateNewEmoji"
       >
@@ -192,8 +195,15 @@ async function createEmoji(pos: number) {
   grid-template-rows: repeat(v-bind(HEIGHT), 1.2em);
   grid-column-gap: 4px;
   grid-row-gap: 4px;
+  /* font-size: 2rem; */
 
   user-select: none;
+}
+
+@media screen and (min-width: 426px) {
+  .emoji-grid {
+    font-size: 2rem;
+  }
 }
 
 .emoji-grid:hover {

@@ -9,3 +9,4 @@ dist
 yalc.lock
 .yalc
 .firebase
+service-account.json

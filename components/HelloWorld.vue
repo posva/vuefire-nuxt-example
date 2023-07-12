@@ -81,7 +81,13 @@ function fromNow(date: Timestamp) {
         <template v-if="count">count is {{ count.n }}</template>
         <template v-else>click to create today's count!</template>
       </button>
-      <p v-if="count">Last increment: {{ fromNow(count.when) }}</p>
+      <p v-if="count">
+        Last increment:
+        <ClientOnly>
+          {{ fromNow(count.when) }}
+          <template #fallback>...</template>
+        </ClientOnly>
+      </p>
     </template>
     <p>
       Try opening this page in multiple tabs (or devices) to see the count

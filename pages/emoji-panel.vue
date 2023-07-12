@@ -70,7 +70,7 @@ const { ready: canCreateNewEmoji, start } = useTimeout(5000, {
   immediate: false,
 })
 
-const newContent = ref(getRandomEmoji())
+const newContent = useState('random-emoji', getRandomEmoji)
 const currentHover = ref(-1)
 
 function generateNewContent() {
@@ -154,7 +154,11 @@ async function createEmoji(pos: number) {
         :alt="lastCreatedEmoji.displayName"
       />
       created {{ lastCreatedEmoji.content }}
-      <strong>{{ lastCreationRelativeTime }}</strong> after
+      <ClientOnly>
+        <strong>{{ lastCreationRelativeTime }}</strong>
+        <template #fallback>...</template>
+      </ClientOnly>
+      after
       {{ lastCreatedEmoji.revision }} updates.
     </p>
 

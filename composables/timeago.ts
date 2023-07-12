@@ -1,15 +1,18 @@
-import { MaybeRef, useInterval } from '@vueuse/core'
+import { useInterval } from '@vueuse/core'
 import { Timestamp } from 'firebase/firestore'
 
-export function useRelativeTime(when: MaybeRef<Timestamp | undefined | null>) {
+export function useRelativeTime(
+  when: MaybeRefOrGetter<Timestamp | undefined | null>
+) {
   const START = Date.now()
   const elapsedSeconds = useInterval(1000)
 
-  return computed(() =>
-    unref(when) == null
+  return computed(() => {
+    const whenValue = toValue(when)
+    return whenValue == null
       ? 'never'
-      : fromTime(START + elapsedSeconds.value * 1000, unref(when)!.toMillis())
-  )
+      : fromTime(START + elapsedSeconds.value * 1000, whenValue.toMillis())
+  })
 }
 
 // time formatting

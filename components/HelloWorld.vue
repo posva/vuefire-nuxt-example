@@ -6,6 +6,7 @@ import {
   Timestamp,
   setDoc,
   updateDoc,
+  DocumentData,
 } from 'firebase/firestore'
 import { computed } from 'vue'
 import { useDocument, useFirestore } from 'vuefire'
@@ -21,7 +22,10 @@ const props = defineProps({
 const db = useFirestore()
 // this could just be `doc(db, 'count', props.today)` but that wouldn't react to changes
 const todaysCountDoc = computed(() =>
-  doc(db, 'count', props.today).withConverter<{ when: Timestamp; n: number }>({
+  doc(db, 'count', props.today).withConverter<
+    { when: Timestamp; n: number },
+    DocumentData
+  >({
     fromFirestore: (snapshot) => {
       // Here you could do validation with a library like zod
       return snapshot.data(

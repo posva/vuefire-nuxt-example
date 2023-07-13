@@ -3,7 +3,6 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
-
   "functions": [
     {
       "source": ".output/server",
@@ -12,7 +11,6 @@
       "ignore": [".git", "firebase-debug.log", "firebase-debug.*.log"]
     }
   ],
-
   "hosting": {
     "public": ".output/public",
     "site": "vuefire-nuxt",

@@ -21,7 +21,7 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build site
-        run: pnpm run generate
+        run: pnpm run build
 
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:

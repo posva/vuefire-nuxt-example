@@ -1,8 +1,7 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['nuxt-vuefire'],
-  // temporary, otherwise fails with vite error but this is not enough because we haven't added admin credentials
-  ssr: false,
+  ssr: true,
 
   nitro: {
     preset: 'firebase',

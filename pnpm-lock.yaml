@@ -21,11 +21,11 @@ dependencies:
     specifier: ^3.6.2
     version: 3.6.2(@types/node@20.4.2)
   nuxt-vuefire:
-    specifier: ^0.2.3
-    version: 0.2.3(@firebase/app-types@0.9.0)(firebase-admin@11.10.0)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.4)
+    specifier: ^0.2.4
+    version: 0.2.4(@firebase/app-types@0.9.0)(firebase-admin@11.10.0)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.5)
   vuefire:
-    specifier: ^3.1.4
-    version: 3.1.4(firebase@10.0.0)(vue@3.3.4)
+    specifier: ^3.1.5
+    version: 3.1.5(firebase@10.0.0)(vue@3.3.4)
 
 packages:
 
@@ -7980,14 +7980,14 @@ packages:
       fsevents: 2.3.2
     dev: false
 
-  /nuxt-vuefire@0.2.3(@firebase/app-types@0.9.0)(firebase-admin@11.10.0)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.4):
-    resolution: {integrity: sha512-530Zim+fZ4K9osPcaDC2cRBuuZuiMuHco7Hycm3wVbDBkv56w5sTGYSffKz6uZ/u17Keph1kzd9gRs9xVdOEZQ==}
+  /nuxt-vuefire@0.2.4(@firebase/app-types@0.9.0)(firebase-admin@11.10.0)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.5):
+    resolution: {integrity: sha512-gexHjrYAHRCltPpm40oyNaNrvc32j/vcCJeu/Zv16ErkmBCw3xC7RiYeMPCR8biEQQpvQAfTAG0c3ehulBV4jw==}
     peerDependencies:
       '@firebase/app-types': '>=0.8.1'
       firebase: ^9.0.0 || ^10.0.0
       firebase-admin: ^11.3.0
       firebase-functions: ^4.1.0
-      vuefire: '>=3.1.4'
+      vuefire: '>=3.1.5'
     peerDependenciesMeta:
       '@firebase/app-types':
         optional: true
@@ -8002,7 +8002,7 @@ packages:
       firebase-admin: 11.10.0
       firebase-functions: 4.4.1(firebase-admin@11.10.0)
       lru-cache: 10.0.0
-      vuefire: 3.1.4(firebase@10.0.0)(vue@3.3.4)
+      vuefire: 3.1.5(firebase@10.0.0)(vue@3.3.4)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -10487,8 +10487,8 @@ packages:
       '@vue/shared': 3.3.4
     dev: false
 
-  /vuefire@3.1.4(firebase@10.0.0)(vue@3.3.4):
-    resolution: {integrity: sha512-KVKIMVhMWg8j/tsbSRCNVQS2VBseW5eZM0DeKzF2aYuXwwXXcpvTZQo0oFipe61KHDjUPSuBH6qwcd3TawVORA==}
+  /vuefire@3.1.5(firebase@10.0.0)(vue@3.3.4):
+    resolution: {integrity: sha512-RABLikGtvII5lyZzQLbpH9Gdj78+nbP3kKZwBtpjN9yUOaSCgBRfxJhQgz7kBioeCy+ns6x0Jf1wQS3D5/+g9g==}
     engines: {node: '18'}
     peerDependencies:
       '@vue/composition-api': '*'

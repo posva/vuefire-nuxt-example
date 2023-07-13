@@ -2,6 +2,7 @@
 export default defineNuxtConfig({
   modules: ['nuxt-vuefire'],
   ssr: true,
+  devtools: true,
 
   nitro: {
     preset: 'firebase',

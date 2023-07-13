@@ -3,14 +3,25 @@
     "rules": "firestore.rules",
     "indexes": "firestore.indexes.json"
   },
+
+  "functions": [
+    {
+      "source": ".output/server",
+      "runtime": "nodejs18",
+      "codebase": "default",
+      "ignore": [".git", "firebase-debug.log", "firebase-debug.*.log"]
+    }
+  ],
+
   "hosting": {
     "public": ".output/public",
     "site": "vuefire-nuxt",
     "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "cleanUrls": true,
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "function": "server"
       }
     ]
   }

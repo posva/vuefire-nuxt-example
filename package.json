@@ -14,11 +14,11 @@
   "dependencies": {
     "@vueuse/core": "^10.2.1",
     "firebase": "^10.0.0",
-    "firebase-admin": "^11.10.0",
+    "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1",
     "nuxt": "^3.6.2",
-    "nuxt-vuefire": "^0.2.5",
-    "vuefire": "^3.1.6"
+    "nuxt-vuefire": "^0.2.6",
+    "vuefire": "^3.1.7"
   },
   "devDependencies": {
     "@nuxt/devtools": "^0.6.7"

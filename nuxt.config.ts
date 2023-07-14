@@ -34,6 +34,7 @@ export default defineNuxtConfig({
 
   vuefire: {
     auth: true,
+    admin: {},
     config: {
       apiKey: 'AIzaSyCvPJk1gTgga_H7SS6YKgQTSBwBYWzwWBE',
       authDomain: 'nuxtparaeduardo.firebaseapp.com',

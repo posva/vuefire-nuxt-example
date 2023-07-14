@@ -12,20 +12,20 @@ dependencies:
     specifier: ^10.0.0
     version: 10.0.0(react-native@0.71.12)
   firebase-admin:
-    specifier: ^11.10.0
-    version: 11.10.0
+    specifier: ^11.10.1
+    version: 11.10.1
   firebase-functions:
     specifier: ^4.4.1
-    version: 4.4.1(firebase-admin@11.10.0)
+    version: 4.4.1(firebase-admin@11.10.1)
   nuxt:
     specifier: ^3.6.2
     version: 3.6.2(@types/node@20.4.2)
   nuxt-vuefire:
-    specifier: ^0.2.5
-    version: 0.2.5(@firebase/app-types@0.9.0)(firebase-admin@11.10.0)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.6)
+    specifier: ^0.2.6
+    version: 0.2.6(@firebase/app-types@0.9.0)(firebase-admin@11.10.1)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.7)
   vuefire:
-    specifier: ^3.1.6
-    version: 3.1.6(firebase@10.0.0)(vue@3.3.4)
+    specifier: ^3.1.7
+    version: 3.1.7(firebase@10.0.0)(vue@3.3.4)
 
 devDependencies:
   '@nuxt/devtools':
@@ -2293,6 +2293,17 @@ packages:
       tslib: 2.6.0
     dev: false
 
+  /@firebase/database-compat@0.3.4:
+    resolution: {integrity: sha512-kuAW+l+sLMUKBThnvxvUZ+Q1ZrF/vFJ58iUY9kAcbX48U03nVzIF6Tmkf0p3WVQwMqiXguSgtOPIB6ZCeF+5Gg==}
+    dependencies:
+      '@firebase/component': 0.6.4
+      '@firebase/database': 0.14.4
+      '@firebase/database-types': 0.10.4
+      '@firebase/logger': 0.4.0
+      '@firebase/util': 1.9.3
+      tslib: 2.6.0
+    dev: false
+
   /@firebase/database-compat@1.0.0:
     resolution: {integrity: sha512-Udkz3/lfF1RZa6A1ygergG/xT7fHSeIUk2kx5bsiv0ChllaNkgovkhC2sgSJuGUBYqlnhLmkDwX2nkAwSutgEQ==}
     dependencies:
@@ -2304,11 +2315,29 @@ packages:
       tslib: 2.6.0
     dev: false
 
+  /@firebase/database-types@0.10.4:
+    resolution: {integrity: sha512-dPySn0vJ/89ZeBac70T+2tWWPiJXWbmRygYv0smT5TfE3hDrQ09eKMF3Y+vMlTdrMWq7mUdYW5REWPSGH4kAZQ==}
+    dependencies:
+      '@firebase/app-types': 0.9.0
+      '@firebase/util': 1.9.3
+    dev: false
+
   /@firebase/database-types@1.0.0:
     resolution: {integrity: sha512-SjnXStoE0Q56HcFgNQ+9SsmJc0c8TqGARdI/T44KXy+Ets3r6x/ivhQozT66bMnCEjJRywYoxNurRTMlZF8VNg==}
     dependencies:
       '@firebase/app-types': 0.9.0
       '@firebase/util': 1.9.3
+    dev: false
+
+  /@firebase/database@0.14.4:
+    resolution: {integrity: sha512-+Ea/IKGwh42jwdjCyzTmeZeLM3oy1h0mFPsTy6OqCWzcu/KFqRAr5Tt1HRCOBlNOdbh84JPZC47WLU18n2VbxQ==}
+    dependencies:
+      '@firebase/auth-interop-types': 0.2.1
+      '@firebase/component': 0.6.4
+      '@firebase/logger': 0.4.0
+      '@firebase/util': 1.9.3
+      faye-websocket: 0.11.4
+      tslib: 2.6.0
     dev: false
 
   /@firebase/database@1.0.0:
@@ -2669,8 +2698,8 @@ packages:
       '@types/node': 20.4.1
     dev: false
 
-  /@grpc/grpc-js@1.8.17:
-    resolution: {integrity: sha512-DGuSbtMFbaRsyffMf+VEkVu8HkSXEUfO3UyGJNtqxW9ABdtTIA+2UXAJpwbJS+xfQxuwqLUeELmL6FuZkOqPxw==}
+  /@grpc/grpc-js@1.8.18:
+    resolution: {integrity: sha512-2uWPtxhsXmVgd8WzDhfamSjHpZDXfMjMDciY6VRTq4Sn7rFzazyf0LLDa0oav+61UHIoEZb4KKaAV6S7NuJFbQ==}
     engines: {node: ^8.13.0 || >=10.10.0}
     dependencies:
       '@grpc/proto-loader': 0.7.8
@@ -6165,13 +6194,13 @@ packages:
       path-exists: 4.0.0
     dev: false
 
-  /firebase-admin@11.10.0:
-    resolution: {integrity: sha512-lRQ2L7WEpjZyftnQk+lQwzgSkK8vMlX0lajSjWQLpO9Jc8LKo72p4N2jWBcRPuSti///Q4+5OWn2LkmD+gXX1Q==}
+  /firebase-admin@11.10.1:
+    resolution: {integrity: sha512-atv1E6GbuvcvWaD3eHwrjeP5dAVs+EaHEJhu9CThMzPY6In8QYDiUR6tq5SwGl4SdA/GcAU0nhwWc/FSJsAzfQ==}
     engines: {node: '>=14'}
     dependencies:
       '@fastify/busboy': 1.2.1
-      '@firebase/database-compat': 1.0.0
-      '@firebase/database-types': 1.0.0
+      '@firebase/database-compat': 0.3.4
+      '@firebase/database-types': 0.10.4
       '@types/node': 20.4.2
       jsonwebtoken: 9.0.1
       jwks-rsa: 3.0.1
@@ -6185,7 +6214,7 @@ packages:
       - supports-color
     dev: false
 
-  /firebase-functions@4.4.1(firebase-admin@11.10.0):
+  /firebase-functions@4.4.1(firebase-admin@11.10.1):
     resolution: {integrity: sha512-3no53Lg12ToNlPSgLZtAFLQAz6si7ilHvzO8NC3/2EybyUwegpj5YhHwNiCw839lmAWp3znjATJDTvADFiZMrg==}
     engines: {node: '>=14.10.0'}
     hasBin: true
@@ -6196,7 +6225,7 @@ packages:
       '@types/express': 4.17.3
       cors: 2.8.5
       express: 4.18.2
-      firebase-admin: 11.10.0
+      firebase-admin: 11.10.1
       node-fetch: 2.6.12
       protobufjs: 7.2.4
     transitivePeerDependencies:
@@ -6575,7 +6604,7 @@ packages:
     engines: {node: '>=12'}
     hasBin: true
     dependencies:
-      '@grpc/grpc-js': 1.8.17
+      '@grpc/grpc-js': 1.8.18
       '@grpc/proto-loader': 0.7.8
       '@types/long': 4.0.2
       '@types/rimraf': 3.0.2
@@ -8829,14 +8858,14 @@ packages:
     optionalDependencies:
       fsevents: 2.3.2
 
-  /nuxt-vuefire@0.2.5(@firebase/app-types@0.9.0)(firebase-admin@11.10.0)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.6):
-    resolution: {integrity: sha512-U2aOLvsPgBkKwZ4Y3l9eMP7wukun8vl4bXYVaeFiUXxisxuf1ZaW7CQpnEA4e5U/7pO4Wz8Bz4Sia/Fw2lsK9A==}
+  /nuxt-vuefire@0.2.6(@firebase/app-types@0.9.0)(firebase-admin@11.10.1)(firebase-functions@4.4.1)(firebase@10.0.0)(vuefire@3.1.7):
+    resolution: {integrity: sha512-JECFhtPXkhrsOvPiRr0DasocBkEIbET8LyXinBP19/ulEy02lhGRS4YcHD6x/Hs0iqSsr2/t9LhioJsOAGh35g==}
     peerDependencies:
       '@firebase/app-types': '>=0.8.1'
       firebase: ^9.0.0 || ^10.0.0
       firebase-admin: ^11.3.0
       firebase-functions: ^4.1.0
-      vuefire: '>=3.1.6'
+      vuefire: '>=3.1.7'
     peerDependenciesMeta:
       '@firebase/app-types':
         optional: true
@@ -8848,10 +8877,10 @@ packages:
       '@firebase/app-types': 0.9.0
       '@nuxt/kit': 3.6.2
       firebase: 10.0.0(react-native@0.71.12)
-      firebase-admin: 11.10.0
-      firebase-functions: 4.4.1(firebase-admin@11.10.0)
+      firebase-admin: 11.10.1
+      firebase-functions: 4.4.1(firebase-admin@11.10.1)
       lru-cache: 10.0.0
-      vuefire: 3.1.6(firebase@10.0.0)(vue@3.3.4)
+      vuefire: 3.1.7(firebase@10.0.0)(vue@3.3.4)
     transitivePeerDependencies:
       - rollup
       - supports-color
@@ -11622,8 +11651,8 @@ packages:
       '@vue/server-renderer': 3.3.4(vue@3.3.4)
       '@vue/shared': 3.3.4
 
-  /vuefire@3.1.6(firebase@10.0.0)(vue@3.3.4):
-    resolution: {integrity: sha512-BKhQjT1pGQTdNh7WKLz93Sn286znbvEF/leXN1ymKM8FS54hXBEMcG23IPPmP5agb+VNFRhi5+QwO2G/92vBJw==}
+  /vuefire@3.1.7(firebase@10.0.0)(vue@3.3.4):
+    resolution: {integrity: sha512-igOO+t2rPtLy7AMH0wLn2hlLiSpE4sk/pNtjZoUv619coHBNOJbFWa728bAYu2q9k++cbMLRbPp0Qf7ILgseSQ==}
     engines: {node: '18'}
     peerDependencies:
       '@vue/composition-api': '*'

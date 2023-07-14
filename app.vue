@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import {
-  addDoc,
   doc,
   getDoc,
   serverTimestamp,
@@ -10,6 +9,10 @@ import {
 
 const db = useFirestore()
 const user = useCurrentUser()
+
+const {
+  public: { vuefireVersion, nuxtVuefireVersion },
+} = useRuntimeConfig()
 
 const router = useRouter()
 const route = useRoute()
@@ -78,6 +81,8 @@ watch(user, async (currentUser, previousUser) => {
       />
       Source Code
     </a>
+    - <code>vuefire@{{ vuefireVersion }}</code> -
+    <code>nuxt-vuefire@{{ nuxtVuefireVersion }}</code>
   </p>
 </template>
 

@@ -1,3 +1,18 @@
+import { createRequire } from 'node:module'
+import { readFileSync } from 'node:fs'
+import { resolve } from 'node:path'
+
+const __dirname = new URL('.', import.meta.url).pathname
+const vuefirePkg = JSON.parse(
+  readFileSync(resolve(__dirname, 'node_modules/vuefire/package.json'), 'utf-8')
+)
+const nuxtVuefirePkg = JSON.parse(
+  readFileSync(
+    resolve(__dirname, 'node_modules/nuxt-vuefire/package.json'),
+    'utf-8'
+  )
+)
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
   modules: ['nuxt-vuefire'],
@@ -10,6 +25,13 @@ export default defineNuxtConfig({
       crawlLinks: false,
       routes: ['/', '/login'],
       ignore: ['/posts/others'],
+    },
+  },
+
+  runtimeConfig: {
+    public: {
+      vuefireVersion: vuefirePkg.version,
+      nuxtVuefireVersion: nuxtVuefirePkg.version,
     },
   },
 

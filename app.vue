@@ -14,11 +14,14 @@ const user = useCurrentUser()
 const router = useRouter()
 const route = useRoute()
 watch(user, async (currentUser, previousUser) => {
-  if (currentUser) {
-    addDoc
-  }
-  // redirect to login if they logout
-  if (!currentUser && previousUser) {
+  // redirect to login if they logout and the current route is only for authenticated users
+  if (
+    !currentUser &&
+    previousUser &&
+    (Array.isArray(route.meta.middleware)
+      ? route.meta.middleware.includes('authenticated')
+      : route.meta.middleware === 'authenticated')
+  ) {
     return router.push({ name: 'login' })
   }
   // redirect the user if they are logged in but were rejected because the user wasn't ready yet

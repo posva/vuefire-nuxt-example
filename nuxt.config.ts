@@ -6,11 +6,11 @@ export default defineNuxtConfig({
 
   nitro: {
     preset: 'firebase',
-    // prerender: {
-    //   crawlLinks: false,
-    //   routes: ['/'],
-    //   ignore: ['/posts/others'],
-    // },
+    prerender: {
+      crawlLinks: false,
+      routes: ['/', '/login'],
+      ignore: ['/posts/others'],
+    },
   },
 
   app: {

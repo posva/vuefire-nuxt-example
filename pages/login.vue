@@ -22,6 +22,7 @@ const auth = useFirebaseAuth()! // only exists on client side
 const user = useCurrentUser()
 function signinRedirect() {
   signInWithRedirect(auth, googleAuthProvider).catch((reason) => {
+    console.error('Failed signinRedirect', reason)
     error.value = reason
   })
 }
@@ -29,6 +30,7 @@ function signinRedirect() {
 function signinPopup() {
   error.value = null
   signInWithPopup(auth, googleAuthProvider).catch((reason) => {
+    console.error('Failed signinPopup', reason)
     error.value = reason
   })
 }
@@ -38,6 +40,7 @@ const error = ref<Error | null>(null)
 // only on client side
 onMounted(() => {
   getRedirectResult(auth).catch((reason) => {
+    console.error('Failed redirect result', reason)
     error.value = reason
   })
 })

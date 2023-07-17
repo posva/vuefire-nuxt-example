@@ -19,7 +19,7 @@
     "rewrites": [
       {
         "source": "**",
-        "function": "server"
+        "function": "serverSecondGen"
       }
     ]
   },

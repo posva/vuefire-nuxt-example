@@ -20,7 +20,7 @@ export default defineNuxtConfig({
   devtools: true,
 
   nitro: {
-    preset: 'firebase',
+    preset: './preset',
     prerender: {
       crawlLinks: false,
       routes: ['/', '/login'],

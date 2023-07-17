@@ -21,6 +21,6 @@
     "vuefire": "^3.1.7"
   },
   "devDependencies": {
-    "@nuxt/devtools": "^0.6.7"
+    "@nuxt/devtools": "npm:@nuxt/devtools-edge@latest"
   }
 }

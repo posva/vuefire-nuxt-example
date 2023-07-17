@@ -17,7 +17,12 @@ const nuxtVuefirePkg = JSON.parse(
 export default defineNuxtConfig({
   modules: ['nuxt-vuefire'],
   ssr: true,
-  devtools: true,
+  devtools: {
+    enabled: true,
+    experimental: {
+      timeline: true,
+    },
+  },
 
   nitro: {
     preset: './preset',

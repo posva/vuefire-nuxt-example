@@ -24,7 +24,11 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: './preset',
+    preset: 'firebase',
+    firebase: {
+      gen: 2,
+      nodeVersion: '18',
+    },
     prerender: {
       crawlLinks: false,
       routes: ['/', '/login'],
@@ -59,8 +63,9 @@ export default defineNuxtConfig({
   css: ['@/assets/style.css'],
 
   vuefire: {
-    auth: true,
-    admin: {},
+    auth: {
+      enabled: true,
+    },
     config: {
       apiKey: 'AIzaSyCvPJk1gTgga_H7SS6YKgQTSBwBYWzwWBE',
       authDomain: 'nuxtparaeduardo.firebaseapp.com',

@@ -12,13 +12,13 @@
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
-    "@vueuse/core": "^10.2.1",
-    "firebase": "^10.0.0",
+    "@vueuse/core": "^10.4.1",
+    "firebase": "^10.3.0",
     "firebase-admin": "^11.10.1",
     "firebase-functions": "^4.4.1",
-    "nuxt": "^3.6.2",
-    "nuxt-vuefire": "^0.2.6",
-    "vuefire": "^3.1.7"
+    "nuxt": "^3.7.0",
+    "nuxt-vuefire": "file:.yalc/nuxt-vuefire",
+    "vuefire": "file:.yalc/vuefire"
   },
   "devDependencies": {
     "@nuxt/devtools": "npm:@nuxt/devtools-edge@latest"

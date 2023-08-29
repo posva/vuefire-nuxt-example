@@ -1,3 +1,10 @@
+# ARCHIVED
+
+See these examples instead:
+
+- https://github.com/posva/nuxt--vuefire-example-spark-plan
+- https://github.com/posva/nuxt--vuefire-example-blaze-plan
+
 # Nuxt example with VueFire (and nuxt-vuefire)
 
 - [Demo on Stackblitz](https://stackblitz.com/github/posva/vuefire-vite-example?file=README.md)
